@@ -73,4 +73,16 @@ app.post('/books/:id/details/editions/rating', (req, res) => {
   res.redirect(`/books/${id}`);
 });
 
+// added put request to edit editions
+app.put('/books/:id', (req, res) => {
+  const {id} = req.params;
+  res.send(`update data according to book id ${id}`);
+});
+
+// added delete request to delete book record according to id
+app.delete('/books/:id', (req, res) => {
+  const { id } = req.params;
+  res.send(`remove record according to book id ${id}`);
+});
+
 module.exports = app;
