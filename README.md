@@ -62,7 +62,7 @@ From within the root directory:
   npm install
 ```
 
-##CRUD API
+## CRUD API
 
 GET: '/books/:id/details
 
