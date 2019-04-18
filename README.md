@@ -61,3 +61,17 @@ From within the root directory:
 ```sh
   npm install
 ```
+
+##CRUD API
+
+GET: '/books/:id/details
+
+GET: '/books/:id/details/:table
+
+POST: '/books/:id/details/editions/status'
+
+POST: '/books/:id/details/editions/rating'
+
+PUT: '/books/:id/details
+
+DELETE: '/books/:id/details/:table
