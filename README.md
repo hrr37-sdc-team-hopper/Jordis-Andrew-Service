@@ -72,6 +72,6 @@ POST: '/books/:id/details/editions/status'
 
 POST: '/books/:id/details/editions/rating'
 
-PUT: '/books/:id/details
+PUT: '/books/:id' (edit books according to book id)
 
-DELETE: '/books/:id/details/:table
+DELETE: '/books/:id' (delete books according to book id)
