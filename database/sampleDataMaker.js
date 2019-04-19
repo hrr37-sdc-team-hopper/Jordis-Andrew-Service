@@ -47,10 +47,6 @@ let createFile = () => {
 
 createFile();
 
-// cd database, node sampleDataMaker.js
-// node --max-old-space-size=8192 sampleDataMaker.js
-
-
 module.exports.createDataObj = createDataObj;
 
 
