@@ -2,7 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
-const db = require('../database/index');
+const db = require('../db/index');
 
 const app = express();
 app.use(bodyParser.json());
@@ -84,5 +84,6 @@ app.delete('/books/:id', (req, res) => {
   const { id } = req.params;
   res.send(`remove record according to book id ${id}`);
 });
+
 
 module.exports = app;

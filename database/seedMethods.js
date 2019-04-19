@@ -2,7 +2,7 @@
 /* eslint-disable no-shadow */
 
 const Promise = require('bluebird');
-const { createData } = require('./sampleDataModel');
+const { createData } = require('./sampleDataMaker');
 
 // creates a data array for 100 BOOKS
 

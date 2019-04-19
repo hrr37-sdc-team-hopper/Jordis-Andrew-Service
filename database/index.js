@@ -1,36 +1,32 @@
-const mysql = require('mysql');
-const Promise = require('bluebird');
+const mongoose = require('mongoose');
 
 
-const connection = mysql.createConnection({
-  user: 'root',
-  host: 'localhost',
-  database: 'books',
-});
+const bookSchema = mongoose.Schema({
+  id: Number,
+  title: String,
+  isbn: Number,
+  language: String,
+  characters: String,
+  awards: String
+})
 
-const db = Promise.promisifyAll(connection, { multiArgs: true });
+let Book = mongoose.model('Book', bookSchema);
 
-// best not to always seed database on server start!
-db.connectAsync()
-  .then(() => console.log(`connected to mysql with id ${db.threadId}`))
-  .error((err) => { console.log('error connecting to db', err); });
-
-module.exports = db;
-
-
-const getDetails = (id) => {
-  const queryString = 'SELECT * FROM details WHERE id = ?';
-  const params = [id];
-
-  return db.queryAsync(queryString, params);
+const getDetails = (id, callback) => {
+  Book.find({'id': id}, (err, data) => {
+    if (err) {
+      console.log('failed to get data', err);
+    } else {
+      callback(data);
+    }
+  })
+  .limit(1);
 };
 
-const getTableData = (table, id) => {
-  const queryString = 'SELECT * FROM ?? WHERE bookId = ?';
-  const params = [table, id];
-  return db.queryAsync(queryString, params);
-};
+// const getTableData = (table, id) => {
+
+// };
 
 
-module.exports.getTableData = getTableData;
+// module.exports.getTableData = getTableData;
 module.exports.getDetails = getDetails;
