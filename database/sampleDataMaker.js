@@ -27,9 +27,10 @@ let dataObj = createDataObj();
 
 console.log('dataObj:', dataObj);
 
+// create array to hold data objs
 let createDataList = () => {
   var dataList = [];
-  for (let i = 0; i < 1000000; i++) {
+  for (let i = 0; i < 2; i++) {
     dataList.push(dataObj);
   }
   return JSON.stringify(dataList);
@@ -38,9 +39,8 @@ let createDataList = () => {
 let dataList = createDataList();
 
 // write the data list in a json file
-
 let createFile = () => {
-    fs.writeFile(`./dataFiles/mockData_10.json`, dataList, () => {
+    fs.writeFile(`./dataFiles/testData.json`, dataList, () => {
       console.log(`json file created`);
     });
 };
