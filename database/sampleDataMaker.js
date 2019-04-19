@@ -37,8 +37,9 @@ let createDataList = () => {
 
 let dataList = createDataList();
 
-let createFile = () => {
+// write the data list in a json file
 
+let createFile = () => {
     fs.writeFile(`./dataFiles/mockData_10.json`, dataList, () => {
       console.log(`json file created`);
     });
@@ -46,6 +47,8 @@ let createFile = () => {
 
 createFile();
 
+// cd database, node sampleDataMaker.js
+// node --max-old-space-size=8192 sampleDataMaker.js
 
 
 module.exports.createDataObj = createDataObj;
