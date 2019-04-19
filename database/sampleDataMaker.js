@@ -1,4 +1,4 @@
-const faker = require('faker');
+
 const fs = require('fs');
 
 const {
@@ -27,6 +27,7 @@ let dataObj = createDataObj();
 
 console.log('dataObj:', dataObj);
 
+// create array to hold data objs
 let createDataList = () => {
   var dataList = [];
   for (let i = 0; i < 1000000; i++) {
@@ -37,12 +38,11 @@ let createDataList = () => {
 
 let dataList = createDataList();
 
-// write the data list in a json file
-
+// write the data in 10 json files
 let createFile = () => {
-    fs.writeFile(`./dataFiles/mockData_10.json`, dataList, () => {
-      console.log(`json file created`);
-    });
+  for (let i = 1; i <= 10; i++) {
+    fs.writeFileSync(`./mockDataFiles/mockData${i}.json`, dataList);
+  }
 };
 
 createFile();
