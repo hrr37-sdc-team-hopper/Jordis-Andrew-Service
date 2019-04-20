@@ -2,7 +2,7 @@
 const fs = require('fs');
 
 const {
-  type, pageNum, publisher, dates, title, isbn, language, characterArr, awardsArr, editionsArr, settingsArr,
+  type, pageNum, publisher, dates, title, isbn, language, characterArr, awardsArr, editionsArr, settings,
 } = require('./sampleDataMethods.js');
 
 const createDataObj = () => {
@@ -16,7 +16,7 @@ const createDataObj = () => {
     isbn13: isbn(13),
     language: language(),
     characters: characterArr(),
-    settings: settingsArr(),
+    settings: settings(),
     litAwards: awardsArr(),
     editions: editionsArr(),
   };
@@ -25,7 +25,7 @@ const createDataObj = () => {
 
 let dataObj = createDataObj();
 
-console.log('dataObj:', dataObj);
+console.log('dataObj = ', dataObj);
 
 // create array to hold data objs
 let createDataList = () => {
