@@ -35,55 +35,16 @@ const publisher = () => {
 };
 module.exports.publisher = publisher;
 
-/* =================== First and Original Publication Dates ===================== */
+/* =================== Original Publication Dates ================== */
 
 const dates = () => {
-  const dateObj = {
-    firstPubDate: null,
-    orgPubDate: null,
-  };
-  // helper function to add suffix to day
-  const addSuffix = (string) => {
-    const num = Number(string);
-    if (num === 1 || num === 21 || num === 31) {
-      return `${string}st`;
-    } if (num === 2 || num === 22) {
-      return `${string}nd`;
-    } if (num === 3 || num === 23) {
-      return `${string}rd`;
-    }
-    return `${string}th`;
-  };
-  // get random date
   let orgPubDate = faker.date.past(100);
   // stringify date
   const options = {
     year: 'numeric', month: 'long', day: 'numeric', localeMatcher: 'best fit',
   };
-  orgPubDate = orgPubDate.toLocaleDateString('en-US', options).split(' ');
-  // edit into proper format ex: [August, 15, 1987]
-  const day1 = orgPubDate[1].slice(0, orgPubDate[1].length - 1);
-  // set date to day1
-  orgPubDate[1] = day1;
-
-  // create first pub date;
-  const firstPubDate = orgPubDate.slice();
-  // recalculate day before;
-  let day2 = Number(firstPubDate[1]);
-  if (day2 !== '1') {
-    day2 -= (Math.floor(Math.random() * day2));
-  }
-  // reset date for firstPubDate;
-  firstPubDate[1] = day2.toString();
-
-  // add suffix to both!
-  orgPubDate[1] = addSuffix(orgPubDate[1]);
-  firstPubDate[1] = addSuffix(firstPubDate[1]);
-  // join into string for both
-  dateObj.firstPubDate = firstPubDate.join(' ');
-  dateObj.orgPubDate = orgPubDate.join(' ');
-
-  return dateObj;
+  orgPubDate = orgPubDate.toLocaleDateString('en-US', options);
+  return orgPubDate;
 };
 module.exports.dates = dates;
 
@@ -98,7 +59,6 @@ module.exports.title = title;
 
 const isbn = (limit) => {
   let isbnNum = '';
-
   // while isbn length is less than 11;
   while (isbnNum.length < (limit + 1)) {
     // add to isbn string;
@@ -117,7 +77,6 @@ const language = () => {
   const languages = ['English', 'Korean', 'Spanish', 'Polish', 'Russian', 'Japanese', 'Italian', 'French', 'Chinese', 'Indian'];
 
   const randNum = getRandomInt(0, 10);
-
   return languages[randNum];
 };
 module.exports.language = language;
@@ -127,14 +86,13 @@ module.exports.language = language;
 const characterArr = () => {
   const charArr = [];
 
-  let num = getRandomInt(1, 8);
+  let num = getRandomInt(1, 5);
 
   while (num > 0) {
     const characterName = faker.fake('{{name.firstName}} {{name.lastName}}');
     charArr.push(characterName);
     num -= 1;
   }
-
   return charArr;
 };
 module.exports.characterArr = characterArr;
@@ -143,21 +101,20 @@ module.exports.characterArr = characterArr;
 
 const awardsArr = () => {
   const awardArray = [];
-  let num = getRandomInt(1, 6);
+  let num = getRandomInt(0, 3);
 
   const awards = [
-    'Specsavers National Book Awards', 'Man Booker Prize', 'Pulitzer Prize', 'Costa Book Awards', 'Neustadt International Prize for Literature', 'Hugo Award', 'Guardian First Book Award', 'National Book Award', 'Bailey\'s Women\'s Prize for Fiction', 'The John Newbery Medal', 'Edgar Awards', 'National Book Critics Circle Award',
+    'Specsavers National Book Awards', 'Man Booker Prize', 'Pulitzer Prize', 'Costa Book Awards', 'Neustadt International Prize for Literature', 'Hugo Award', 'Guardian First Book Award', 'National Book Award', 'Edgar Awards', 'National Book Critics Circle Award',
   ];
 
   while (num > 0) {
     const awardObj = {};
-    const awardIndex = getRandomInt(0, 6);
+    const awardIndex = getRandomInt(0, 9);
     awardObj.name = awards[awardIndex];
     awardObj.date = faker.date.past(5).getFullYear();
     awardArray.push(awardObj);
     num -= 1;
   }
-
   return awardArray;
 };
 
@@ -182,25 +139,11 @@ const coverUrl = () => {
 };
 module.exports.coverUrl = coverUrl;
 
-// /* =================== Stats ===================== */
-// var readStatus = () => {
-//   let num = getRandomInt(0, 3);
-//   let statusArray = ['Want to Read', 'Currently Reading', 'Read'];
-
-//   return statusArray[num];
-// };
-// module.exports.readStatus = readStatus;
-
-// /* =================== Rating ===================== */
-// var rating = () => {
-//   return getRandomInt(0, 6);
-// };
-// module.exports.rating = rating;
 
 /* =================== Editions Array ===================== */
 const editionsArr = () => {
   const editionsArray = [];
-  let num = getRandomInt(1, 4);
+  let num = getRandomInt(0, 2);
 
   while (num > 0) {
     const editionsObj = {
@@ -209,7 +152,7 @@ const editionsArr = () => {
       title: title(),
       type: type(),
       publisher: publisher(),
-      officialPubDate: dates().orgPubDate,
+      officialPubDate: dates(),
       coverUrl: coverUrl(),
       // can't actually access this status without logging in.
       // assume user is NOT logged in.
@@ -225,23 +168,15 @@ const editionsArr = () => {
 
 module.exports.editionsArr = editionsArr;
 
-/* =================== Settings Array ===================== */
+/* =================== Settings ===================== */
 
-const settingsArr = () => {
-  const location = () => {
-    const city = faker.address.city();
-    const country = faker.address.country();
-    return { city, country };
+const settings = () => {
+  const location =  {
+    city: faker.address.city(),
+    country: faker.address.country()
   };
 
-  const settingsArray = [];
-  const num = getRandomInt(1, 4);
-
-  for (let i = 0; i < num; i += 1) {
-    settingsArray.push(location());
-  }
-
-  return settingsArray;
+  return location;
 };
 
-module.exports.settingsArr = settingsArr;
+module.exports.settings = settings;
