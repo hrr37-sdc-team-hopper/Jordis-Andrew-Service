@@ -26,27 +26,22 @@ const createDataObj = () => {
 };
 
 let dataObj = createDataObj();
-console.log('dataObj = ', dataObj);
+// console.log('dataObj = ', dataObj);
 
-// let count = 1;
 let createList = () => {
 
   writer.pipe(fs.createWriteStream(`./csvFiles/mockData10m.csv`))
-
   for (let i = 0; i < 10000000; i++) {
     writer.write(dataObj);
   }
-
   writer.end();
 }
 
 createList();
 
-// for (let i = 0; i < 5; i++) {
-//   createList();
-//   count ++;
-// }
+
 //3:27 3.46G
+
 // ================= create JSON files ===================
 // create array to hold data objs
 // let createDataList = () => {
@@ -57,17 +52,14 @@ createList();
 //   return JSON.stringify(dataList);
 //   // return dataList;
 // }
-
 // let dataList = createDataList();
 // console.log('dataList =', dataList);
-
 // write the data in 10 json files
 // let createFile = () => {
 //   for (let i = 1; i <= 10; i++) {
 //     fs.writeFileSync(`./mockDataFiles/mockData${i}.json`, createDataList());
 //   }
 // };
-
 // createFile();
 
 module.exports.createDataObj = createDataObj;
