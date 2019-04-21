@@ -19,32 +19,21 @@ module.exports.type = type;
 /* =================== Page Number ===================== */
 
 const pageNum = () => {
-  let num = faker.random.number();
-  // if page number is less than 10 or greater than 10,000
-  while (num < 10 || num > 2000) {
-    num = faker.random.number();
-  }
-  return num;
+  return faker.random.number({'min': 250, 'max': 800});
 };
 module.exports.pageNum = pageNum;
 
-/* =================== publisher ===================== */
+/* =================== Publisher ===================== */
 
 const publisher = () => {
   return faker.company.companyName();
 };
 module.exports.publisher = publisher;
 
-/* =================== Original Publication Dates ================== */
+/* =================== Publication Dates ================== */
 
 const dates = () => {
-  let orgPubDate = faker.date.past(100);
-  // stringify date
-  const options = {
-    year: 'numeric', month: 'long', day: 'numeric', localeMatcher: 'best fit',
-  };
-  orgPubDate = orgPubDate.toLocaleDateString('en-US', options);
-  return orgPubDate;
+  return `${faker.date.month()} ${faker.random.number({ 'min': 1, 'max': 30 })}, ${(Math.floor(Math.random() * (2019 - 1960)) + 1960)}`
 };
 module.exports.dates = dates;
 
@@ -85,7 +74,6 @@ module.exports.language = language;
 
 const characterArr = () => {
   const charArr = [];
-
   let num = getRandomInt(1, 5);
 
   while (num > 0) {
@@ -104,15 +92,13 @@ const awardsArr = () => {
   let num = getRandomInt(0, 3);
 
   const awards = [
-    'Specsavers National Book Awards', 'Man Booker Prize', 'Pulitzer Prize', 'Costa Book Awards', 'Neustadt International Prize for Literature', 'Hugo Award', 'Guardian First Book Award', 'National Book Award', 'Edgar Awards', 'National Book Critics Circle Award',
+    'Specsavers National Book Awards', 'Man Booker Prize', 'Pulitzer Prize', 'Costa Book Awards', 'Hugo Award', 'Guardian First Book Award', 'National Book Award', 'Edgar Awards', 'National Book Critics Circle Award',
   ];
 
   while (num > 0) {
-    const awardObj = {};
     const awardIndex = getRandomInt(0, 9);
-    awardObj.name = awards[awardIndex];
-    awardObj.date = faker.date.past(5).getFullYear();
-    awardArray.push(awardObj);
+    let award = `${awards[awardIndex]}, ${faker.date.past(10).getFullYear()}`
+    awardArray.push(award);
     num -= 1;
   }
   return awardArray;
@@ -122,45 +108,27 @@ module.exports.awardsArr = awardsArr;
 
 /* =================== Cover Urls ===================== */
 const coverUrl = () => {
-  const urlStringArr = [
-    'https://s3.us-east-2.amazonaws.com/hrr37-fec/fec-bookcovers/editionPic0.jpg',
-    'https://s3.us-east-2.amazonaws.com/hrr37-fec/fec-bookcovers/editionPic1.jpg',
-    'https://s3.us-east-2.amazonaws.com/hrr37-fec/fec-bookcovers/editionPic2.jpg',
-    'https://s3.us-east-2.amazonaws.com/hrr37-fec/fec-bookcovers/editionPic3.jpg',
-    'https://s3.us-east-2.amazonaws.com/hrr37-fec/fec-bookcovers/editionPic4.jpg',
-    'https://s3.us-east-2.amazonaws.com/hrr37-fec/fec-bookcovers/editionPic5.jpg',
-    'https://s3.us-east-2.amazonaws.com/hrr37-fec/fec-bookcovers/editionPic6.jpg',
-    'https://s3.us-east-2.amazonaws.com/hrr37-fec/fec-bookcovers/editionPic7.jpg',
-    'https://s3.us-east-2.amazonaws.com/hrr37-fec/fec-bookcovers/editionPic8.jpg',
-    'https://s3.us-east-2.amazonaws.com/hrr37-fec/fec-bookcovers/editionPic9.jpg',
-  ];
-  const num = getRandomInt(0, 10);
-  return urlStringArr[num];
+  let image = faker.image.avatar();
+  let imageArr = [];
+  for (let i = 0; i < 200; i++) {
+    imageArr.push(image);
+  }
+
+  const num = getRandomInt(1, 200);
+  return imageArr[num];
 };
 module.exports.coverUrl = coverUrl;
 
 
 /* =================== Editions Array ===================== */
+
 const editionsArr = () => {
   const editionsArray = [];
-  let num = getRandomInt(0, 2);
+  let num = getRandomInt(0, 4);
 
   while (num > 0) {
-    const editionsObj = {
-      isbn10: isbn(10),
-      isbn13: isbn(13),
-      title: title(),
-      type: type(),
-      publisher: publisher(),
-      officialPubDate: dates(),
-      coverUrl: coverUrl(),
-      // can't actually access this status without logging in.
-      // assume user is NOT logged in.
-      // status: readStatus(),
-      // rating: rating()
-    };
-
-    editionsArray.push(editionsObj);
+    let imageUrl = `${coverUrl()}`;
+    editionsArray.push(imageUrl);
     num -= 1;
   }
   return editionsArray;
@@ -171,12 +139,9 @@ module.exports.editionsArr = editionsArr;
 /* =================== Settings ===================== */
 
 const settings = () => {
-  const location =  {
-    city: faker.address.city(),
-    country: faker.address.country()
-  };
-
-  return location;
+  return `${faker.address.city()}, ${faker.address.country()}`
 };
 
 module.exports.settings = settings;
+
+

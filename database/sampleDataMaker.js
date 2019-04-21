@@ -36,7 +36,7 @@ let createDataList = () => {
   return JSON.stringify(dataList);
 }
 
-let dataList = createDataList();
+// let dataList = createDataList();
 
 // write the data in 10 json files
 let createFile = () => {
@@ -44,9 +44,28 @@ let createFile = () => {
     fs.writeFileSync(`./mockDataFiles/mockData${i}.json`, dataList);
   }
 };
-//s
-createFile();
+
+// createFile();
 
 module.exports.createDataObj = createDataObj;
 
 
+
+// node --max-old-space-size=8192 sampleDataMaker.js
+// 11 secs 3.48G
+/*
+dataObj =  { type: 'Hardcover',
+  pageNum: 525,
+  publisher: "O'Hara - Hilpert",
+  dates: 'September 7, 1963',
+  title: 'Borders Liaison',
+  isbn10: '9182423004',
+  isbn13: '4877542701446',
+  language: 'Polish',
+  characters: [ 'Verlie Bergnaum', 'Norma Kris', 'Florence Rath' ],
+  settings: 'Amelietown, Western Sahara',
+  litAwards:
+   [ 'Guardian First Book Award, 2011', 'Costa Book Awards, 2017' ],
+  editions:
+   [ 'https://s3.amazonaws.com/uifaces/faces/twitter/danillos/128.jpg' ] }
+*/
