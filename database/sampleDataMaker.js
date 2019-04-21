@@ -23,49 +23,33 @@ const createDataObj = () => {
   return dataObj;
 };
 
-let dataObj = createDataObj();
+// let dataObj = createDataObj();
 
-console.log('dataObj = ', dataObj);
+// console.log('dataObj = ', dataObj);
 
 // create array to hold data objs
 let createDataList = () => {
   var dataList = [];
   for (let i = 0; i < 1000000; i++) {
-    dataList.push(dataObj);
+    dataList.push(createDataObj());
   }
   return JSON.stringify(dataList);
+  // return dataList;
 }
 
-// let dataList = createDataList();
+let dataList = createDataList();
+
+// console.log('dataList =', dataList);
 
 // write the data in 10 json files
 let createFile = () => {
   for (let i = 1; i <= 10; i++) {
-    fs.writeFileSync(`./mockDataFiles/mockData${i}.json`, dataList);
+    fs.writeFileSync(`./mockDataFiles/mockData${i}.json`, createDataList());
   }
 };
 
-// createFile();
+createFile();
 
 module.exports.createDataObj = createDataObj;
 
 
-
-// node --max-old-space-size=8192 sampleDataMaker.js
-// 11 secs 3.48G
-/*
-dataObj =  { type: 'Hardcover',
-  pageNum: 525,
-  publisher: "O'Hara - Hilpert",
-  dates: 'September 7, 1963',
-  title: 'Borders Liaison',
-  isbn10: '9182423004',
-  isbn13: '4877542701446',
-  language: 'Polish',
-  characters: [ 'Verlie Bergnaum', 'Norma Kris', 'Florence Rath' ],
-  settings: 'Amelietown, Western Sahara',
-  litAwards:
-   [ 'Guardian First Book Award, 2011', 'Costa Book Awards, 2017' ],
-  editions:
-   [ 'https://s3.amazonaws.com/uifaces/faces/twitter/danillos/128.jpg' ] }
-*/
