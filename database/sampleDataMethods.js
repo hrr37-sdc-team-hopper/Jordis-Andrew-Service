@@ -81,7 +81,8 @@ const characterArr = () => {
     charArr.push(characterName);
     num -= 1;
   }
-  return charArr;
+
+  return charArr.join(', ');
 };
 module.exports.characterArr = characterArr;
 
@@ -97,11 +98,11 @@ const awardsArr = () => {
 
   while (num > 0) {
     const awardIndex = getRandomInt(0, 9);
-    let award = `${awards[awardIndex]}, ${faker.date.past(10).getFullYear()}`
+    let award = `${awards[awardIndex]} ${faker.date.past(10).getFullYear()}`
     awardArray.push(award);
     num -= 1;
   }
-  return awardArray;
+  return awardArray.join(', ');
 };
 
 module.exports.awardsArr = awardsArr;
@@ -131,7 +132,7 @@ const editionsArr = () => {
     editionsArray.push(imageUrl);
     num -= 1;
   }
-  return editionsArray;
+  return editionsArray.join(', ');
 };
 
 module.exports.editionsArr = editionsArr;
