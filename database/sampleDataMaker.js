@@ -51,8 +51,7 @@ module.exports.createDataObj = createDataObj;
 
 
 
-// node --max-old-space-size=8192 sampleDataMaker.js
-// 11 secs 3.48G
+
 /*
 dataObj =  { type: 'Hardcover',
   pageNum: 525,
