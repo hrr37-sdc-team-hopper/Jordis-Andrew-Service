@@ -1,7 +1,5 @@
+
 const fs = require('fs');
-const csvWriter = require('csv-write-stream');
-const writer = csvWriter();
-//https://www.npmjs.com/package/csv-write-stream
 
 const {
   type, pageNum, publisher, dates, title, isbn, language, characterArr, awardsArr, editionsArr, settings,
@@ -26,42 +24,29 @@ const createDataObj = () => {
 };
 
 let dataObj = createDataObj();
-// console.log('dataObj = ', dataObj);
 
-let createList = () => {
+console.log('dataObj = ', dataObj);
 
-  writer.pipe(fs.createWriteStream(`./csvFiles/mockData10m.csv`))
-  for (let i = 0; i < 10000000; i++) {
-    writer.write(dataObj);
+// create array to hold data objs
+let createDataList = () => {
+  var dataList = [];
+  for (let i = 0; i < 1000000; i++) {
+    dataList.push(dataObj);
   }
-  writer.end();
+  return JSON.stringify(dataList);
 }
 
-createList();
+let dataList = createDataList();
 
-
-//3:27 3.46G
-
-// ================= create JSON files ===================
-// create array to hold data objs
-// let createDataList = () => {
-//   var dataList = [];
-//   for (let i = 0; i < 5; i++) {
-//     dataList.push(createDataObj());
-//   }
-//   return JSON.stringify(dataList);
-//   // return dataList;
-// }
-// let dataList = createDataList();
-// console.log('dataList =', dataList);
 // write the data in 10 json files
-// let createFile = () => {
-//   for (let i = 1; i <= 10; i++) {
-//     fs.writeFileSync(`./mockDataFiles/mockData${i}.json`, createDataList());
-//   }
-// };
-// createFile();
+let createFile = () => {
+  for (let i = 1; i <= 10; i++) {
+    fs.writeFileSync(`./mockDataFiles/mockData${i}.json`, dataList);
+  }
+};
+
+createFile();
 
 module.exports.createDataObj = createDataObj;
 
-//node --max-old-space-size=8192
+
