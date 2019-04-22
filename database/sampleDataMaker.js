@@ -53,7 +53,6 @@ let createFile = () => {
   console.timeEnd('Total time');
 }
 
-
 createFile();
 
 
