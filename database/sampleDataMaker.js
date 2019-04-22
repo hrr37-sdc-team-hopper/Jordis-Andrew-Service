@@ -1,10 +1,9 @@
 const fs = require('fs');
 const csvWriter = require('csv-write-stream');
 const writer = csvWriter();
-//https://www.npmjs.com/package/csv-write-stream
 
 const {
-  type, pageNum, publisher, dates, title, isbn, language, characterArr, awardsArr, editionsArr, settings,
+  type, pageNum, publisher, dates, title, isbn, language, characterArr, awardsArr, coverUrl, settings,
 } = require('./sampleDataMethods.js');
 
 const createDataObj = () => {
@@ -14,33 +13,49 @@ const createDataObj = () => {
     publisher: publisher(),
     dates: dates(),
     title: title(),
-    isbn10: isbn(10),
-    isbn13: isbn(13),
+    isbn: isbn(),
     language: language(),
     characters: characterArr(),
     settings: settings(),
     litAwards: awardsArr(),
-    editions: editionsArr(),
+    coverUrl: coverUrl()
   };
   return dataObj;
 };
 
 let dataObj = createDataObj();
-// console.log('dataObj = ', dataObj);
+console.log('dataObj = ', dataObj);
+// ================= create CSV files ===================
 
-let createList = () => {
-
-  writer.pipe(fs.createWriteStream(`./csvFiles/mockData10m.csv`))
-  for (let i = 0; i < 10000000; i++) {
-    writer.write(dataObj);
+let createFile = () => {
+  console.time('Total time');
+  for (let count=1; count<=20; count++) {
+    writer.pipe(fs.createWriteStream(`./csvFiles/mockData${count}.csv`))
+    for (let i = 0; i < 500000; i++) {
+      const dataObj = {
+        bookId: i,
+        type: type(),
+        pageNum: pageNum(),
+        publisher: publisher(),
+        dates: dates(),
+        title: title(),
+        isbn: isbn(),
+        language: language(),
+        characters: characterArr(),
+        settings: settings(),
+        litAwards: awardsArr(),
+        coverUrl: coverUrl()
+      };
+      writer.write(dataObj);
+    }
   }
   writer.end();
+  console.timeEnd('Total time');
 }
 
-createList();
 
+createFile();
 
-//3:27 3.46G
 
 // ================= create JSON files ===================
 // create array to hold data objs

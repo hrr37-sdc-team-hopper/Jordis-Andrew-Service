@@ -8,6 +8,7 @@ npm-debug.log
 node_modules/
 public/bundle.js
 database/mockDataFiles
+database/csvFiles
 
 pids
 *.pid
