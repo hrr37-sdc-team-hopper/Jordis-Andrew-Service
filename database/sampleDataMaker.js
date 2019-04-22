@@ -23,15 +23,16 @@ const createDataObj = () => {
   return dataObj;
 };
 
-let dataObj = createDataObj();
-console.log('dataObj = ', dataObj);
+// let dataObj = createDataObj();
+// console.log('dataObj = ', dataObj);
+
 // ================= create CSV files ===================
 
 let createFile = () => {
   console.time('Total time');
-  for (let count=1; count<=20; count++) {
+  for (let count=1; count<=10; count++) {
     writer.pipe(fs.createWriteStream(`./csvFiles/mockData${count}.csv`))
-    for (let i = 0; i < 500000; i++) {
+    for (let i = 0; i < 100000; i++) {
       const dataObj = {
         bookId: i,
         type: type(),
@@ -55,6 +56,7 @@ let createFile = () => {
 
 createFile();
 
+//Total time: 28849.232ms
 
 // ================= create JSON files ===================
 // create array to hold data objs
@@ -79,3 +81,51 @@ createFile();
 module.exports.createDataObj = createDataObj;
 
 //node --max-old-space-size=8192
+
+
+/*
+let count = 1;
+let createOne = () => {
+  return new Promise((res, rej) => {
+    console.time('Total time');
+    writer.pipe(fs.createWriteStream(`./newCSV/csvData${count}.csv`))
+    for (let i = 0; i < 5; i++) {
+      const dataObj = {
+        bookId: i,
+        type: type(),
+        pageNum: pageNum(),
+        publisher: publisher(),
+        dates: dates(),
+        title: title(),
+        isbn: isbn(),
+        language: language(),
+        characters: characterArr(),
+        settings: settings(),
+        litAwards: awardsArr(),
+        coverUrl: coverUrl()
+      };
+      writer.write(dataObj);
+    }
+
+    writer.end();
+    count++;
+    console.log(`created ${count} file`);
+    console.timeEnd('Total time');
+  });
+}
+
+let createCsv = () => {
+  createOne()
+  .then(createOne)
+  .then(createOne)
+  .then(createOne)
+  .then(createOne)
+  .then(createOne)
+  .then(createOne)
+  .then(createOne)
+  .then(createOne)
+  .then(createOne)
+}
+
+createCsv();
+*/

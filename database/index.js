@@ -23,10 +23,7 @@ const getDetails = (id, callback) => {
   .limit(1);
 };
 
-// const getTableData = (table, id) => {
-
-// };
 
 
-// module.exports.getTableData = getTableData;
+
 module.exports.getDetails = getDetails;
