@@ -1,10 +1,9 @@
 const fs = require('fs');
 const csvWriter = require('csv-write-stream');
 const writer = csvWriter();
-//https://www.npmjs.com/package/csv-write-stream
 
 const {
-  type, pageNum, publisher, dates, title, isbn, language, characterArr, awardsArr, editionsArr, settings,
+  type, pageNum, publisher, dates, title, getIsbn, language, characterArr, awardsArr, coverUrl, settings,
 } = require('./sampleDataMethods.js');
 
 const createDataObj = () => {
@@ -14,33 +13,51 @@ const createDataObj = () => {
     publisher: publisher(),
     dates: dates(),
     title: title(),
-    isbn10: isbn(10),
-    isbn13: isbn(13),
+    isbn: getIsbn(),
     language: language(),
     characters: characterArr(),
     settings: settings(),
     litAwards: awardsArr(),
-    editions: editionsArr(),
+    coverUrl: coverUrl()
   };
   return dataObj;
 };
 
-let dataObj = createDataObj();
+// let dataObj = createDataObj();
 // console.log('dataObj = ', dataObj);
 
-let createList = () => {
+// ================= create CSV files ===================
 
-  writer.pipe(fs.createWriteStream(`./csvFiles/mockData10m.csv`))
-  for (let i = 0; i < 10000000; i++) {
-    writer.write(dataObj);
-  }
+let createFile = () => {
+  console.time('Total time');
+  // for (let count=1; count<=10; count++) {
+    writer.pipe(fs.createWriteStream(`./csvFiles/mockData10M.csv`))
+    for (let i = 0; i < 10000000; i++) {
+      const dataObj = {
+        bookId: i,
+        type: type(),
+        pageNum: pageNum(),
+        publisher: publisher(),
+        dates: dates(),
+        title: title(),
+        isbn: isbn(),
+        language: language(),
+        characters: characterArr(),
+        settings: settings(),
+        litAwards: awardsArr(),
+        coverUrl: coverUrl()
+      };
+      writer.write(dataObj);
+    }
+  // }
   writer.end();
+  console.timeEnd('Total time');
 }
 
-createList();
+createFile();
 
-
-//3:27 3.46G
+//Total time: 413500.185ms -- 1 file x10m - 2.33G
+//Total time: 28849.232ms (29secs) 10 files x 1m - 2.5G total
 
 // ================= create JSON files ===================
 // create array to hold data objs

@@ -6,6 +6,13 @@ const getRandomInt = (min, max) => {
 };
 module.exports.getRandomInt = getRandomInt;
 
+/* =================== Book ID ===================== */
+
+// const bookId = () => {
+//   return faker.random.number({ 'min': 1, 'max': 10000000 });
+// };
+// module.exports.bookId = bookId;
+
 /* =================== Book Type ===================== */
 
 const type = () => {
@@ -19,21 +26,30 @@ module.exports.type = type;
 /* =================== Page Number ===================== */
 
 const pageNum = () => {
-  return faker.random.number({'min': 250, 'max': 800});
+  return getRandomInt(350, 450);
 };
 module.exports.pageNum = pageNum;
 
 /* =================== Publisher ===================== */
 
 const publisher = () => {
-  return faker.company.companyName();
+  let publishers = ['Swaniawski Inc',
+    'Lueilwitz and Sons',
+    'Baumbach Inc',
+    'Rutherford Group',
+    'Shields - Torphy']
+
+  const index = getRandomInt(0, 4);
+  return publishers[index];
 };
 module.exports.publisher = publisher;
 
 /* =================== Publication Dates ================== */
 
 const dates = () => {
-  return `${faker.date.month()} ${faker.random.number({ 'min': 1, 'max': 30 })}, ${(Math.floor(Math.random() * (2019 - 1960)) + 1960)}`
+  let months = ['January', 'March', 'April', 'May', 'June', 'July', 'October', 'November', 'December']
+  let index = getRandomInt(0, 8);
+  return `${months[index]} ${getRandomInt(10, 25)}, ${getRandomInt(1970, 2018)}`
 };
 module.exports.dates = dates;
 
@@ -46,26 +62,19 @@ module.exports.title = title;
 
 /* =================== ISBN generator ===================== */
 
-const isbn = (limit) => {
-  let isbnNum = '';
-  // while isbn length is less than 11;
-  while (isbnNum.length < (limit + 1)) {
-    // add to isbn string;
-    const num = faker.random.number();
-    isbnNum += num.toString();
-  }
-  // splice isbn until 10th char
-  isbnNum = isbnNum.slice(0, limit);
+const getIsbn = () => {
+  let isbnNum = '1234567890';
+  const num = getRandomInt(350, 500);
+  isbnNum += num.toString();
   return isbnNum;
 };
-module.exports.isbn = isbn;
+module.exports.getIsbn = getIsbn;
 
 /* =================== Language generator ===================== */
 
 const language = () => {
-  const languages = ['English', 'Korean', 'Spanish', 'Polish', 'Russian', 'Japanese', 'Italian', 'French', 'Chinese', 'Indian'];
-
-  const randNum = getRandomInt(0, 10);
+  const languages = ['English', 'Spanish', 'Italian', 'French'];
+  const randNum = getRandomInt(0, 4);
   return languages[randNum];
 };
 module.exports.language = language;
@@ -74,14 +83,13 @@ module.exports.language = language;
 
 const characterArr = () => {
   const charArr = [];
-  let num = getRandomInt(1, 5);
+  let num = getRandomInt(1, 4);
 
   while (num > 0) {
-    const characterName = faker.fake('{{name.firstName}} {{name.lastName}}');
+    const characterName = faker.name.findName();
     charArr.push(characterName);
     num -= 1;
   }
-
   return charArr.join(', ');
 };
 module.exports.characterArr = characterArr;
@@ -92,13 +100,11 @@ const awardsArr = () => {
   const awardArray = [];
   let num = getRandomInt(0, 3);
 
-  const awards = [
-    'Specsavers National Book Awards', 'Man Booker Prize', 'Pulitzer Prize', 'Costa Book Awards', 'Hugo Award', 'Guardian First Book Award', 'National Book Award', 'Edgar Awards', 'National Book Critics Circle Award',
-  ];
+  const awards = ['Man Booker Prize 2009', 'Pulitzer Prize 2012', 'Costa Book Awards 2013', 'Hugo Award 2014', 'Edgar Awards 2016'];
 
   while (num > 0) {
-    const awardIndex = getRandomInt(0, 9);
-    let award = `${awards[awardIndex]} ${faker.date.past(10).getFullYear()}`
+    const awardIndex = getRandomInt(0, 5);
+    let award = awards[awardIndex]
     awardArray.push(award);
     num -= 1;
   }
@@ -109,38 +115,31 @@ module.exports.awardsArr = awardsArr;
 
 /* =================== Cover Urls ===================== */
 const coverUrl = () => {
-  let image = faker.image.avatar();
-  let imageArr = [];
-  for (let i = 0; i < 200; i++) {
-    imageArr.push(image);
-  }
 
-  const num = getRandomInt(1, 200);
+  let imageArr = ['https://s3.amazonaws.com/uifaces/faces/twitter/samuelkraft/128.jpg',
+    'https://s3.amazonaws.com/uifaces/faces/twitter/fronx/128.jpg',
+    'https://s3.amazonaws.com/uifaces/faces/twitter/hafeeskhan/128.jpg',
+    'https://s3.amazonaws.com/uifaces/faces/twitter/dhilipsiva/128.jpg',
+    'https://s3.amazonaws.com/uifaces/faces/twitter/gavr1l0/128.jpg',
+    'https://s3.amazonaws.com/uifaces/faces/twitter/r_garcia/128.jpg',
+    'https://s3.amazonaws.com/uifaces/faces/twitter/danro/128.jpg',
+    'https://s3.amazonaws.com/uifaces/faces/twitter/rahmeen/128.jpg',
+    'https://s3.amazonaws.com/uifaces/faces/twitter/kohette/128.jpg',
+    'https://s3.amazonaws.com/uifaces/faces/twitter/sangdth/128.jpg'];
+
+  const num = getRandomInt(1, 10);
   return imageArr[num];
+
 };
 module.exports.coverUrl = coverUrl;
-
-
-/* =================== Editions Array ===================== */
-
-const editionsArr = () => {
-  const editionsArray = [];
-  let num = getRandomInt(0, 4);
-
-  while (num > 0) {
-    let imageUrl = `${coverUrl()}`;
-    editionsArray.push(imageUrl);
-    num -= 1;
-  }
-  return editionsArray.join(', ');
-};
-
-module.exports.editionsArr = editionsArr;
 
 /* =================== Settings ===================== */
 
 const settings = () => {
-  return `${faker.address.city()}, ${faker.address.country()}`
+  // return `${faker.address.city()}, ${faker.address.country()}`
+  let index = getRandomInt(0, 3);
+  const locations = ['London, United Kindom', 'New York, USA', 'Moscow, Russia', 'Paris, France'];
+  return locations[index];
 };
 
 module.exports.settings = settings;
