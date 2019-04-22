@@ -33,23 +33,23 @@ module.exports.pageNum = pageNum;
 /* =================== Publisher ===================== */
 
 const publisher = () => {
-  let arr = ['Swaniawski Inc',
+  let publishers = ['Swaniawski Inc',
     'Lueilwitz and Sons',
     'Baumbach Inc',
     'Rutherford Group',
     'Shields - Torphy']
 
-  const num = getRandomInt(0, 4);
-  return arr[num];
+  const index = getRandomInt(0, 4);
+  return publishers[index];
 };
 module.exports.publisher = publisher;
 
 /* =================== Publication Dates ================== */
 
 const dates = () => {
-  let month = ['January', 'March', 'April', 'May', 'June', 'July', 'October', 'November', 'December']
-  let num = getRandomInt(0, 8);
-  return `${month[num]} ${getRandomInt(10, 25)}, ${getRandomInt(1970, 2018)}`
+  let months = ['January', 'March', 'April', 'May', 'June', 'July', 'October', 'November', 'December']
+  let index = getRandomInt(0, 8);
+  return `${months[index]} ${getRandomInt(10, 25)}, ${getRandomInt(1970, 2018)}`
 };
 module.exports.dates = dates;
 
@@ -62,13 +62,13 @@ module.exports.title = title;
 
 /* =================== ISBN generator ===================== */
 
-const isbn = () => {
+const getIsbn = () => {
   let isbnNum = '1234567890';
   const num = getRandomInt(350, 500);
   isbnNum += num.toString();
   return isbnNum;
 };
-module.exports.isbn = isbn;
+module.exports.getIsbn = getIsbn;
 
 /* =================== Language generator ===================== */
 

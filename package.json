@@ -8,7 +8,7 @@
     "node": ">=6.13.0"
   },
   "scripts": {
-    "seed": "mongoimport -d bookTest -c books --type csv --file database/csvFiles/mockData1.csv --headerline",
+    "seed": "mongoimport -d bookInfo -c books --type csv --file database/csvFiles/mockData10M.csv --headerline",
     "drop:tables": "node database/dropTables.js",
     "start": "nodemon server/server.js",
     "build:dev": "webpack -d --watch --config webpack.dev.js",

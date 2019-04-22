@@ -3,7 +3,7 @@ const csvWriter = require('csv-write-stream');
 const writer = csvWriter();
 
 const {
-  type, pageNum, publisher, dates, title, isbn, language, characterArr, awardsArr, coverUrl, settings,
+  type, pageNum, publisher, dates, title, getIsbn, language, characterArr, awardsArr, coverUrl, settings,
 } = require('./sampleDataMethods.js');
 
 const createDataObj = () => {
@@ -13,7 +13,7 @@ const createDataObj = () => {
     publisher: publisher(),
     dates: dates(),
     title: title(),
-    isbn: isbn(),
+    isbn: getIsbn(),
     language: language(),
     characters: characterArr(),
     settings: settings(),
@@ -30,9 +30,9 @@ const createDataObj = () => {
 
 let createFile = () => {
   console.time('Total time');
-  for (let count=1; count<=10; count++) {
-    writer.pipe(fs.createWriteStream(`./csvFiles/mockData${count}.csv`))
-    for (let i = 0; i < 100000; i++) {
+  // for (let count=1; count<=10; count++) {
+    writer.pipe(fs.createWriteStream(`./csvFiles/mockData10M.csv`))
+    for (let i = 0; i < 10000000; i++) {
       const dataObj = {
         bookId: i,
         type: type(),
@@ -49,14 +49,15 @@ let createFile = () => {
       };
       writer.write(dataObj);
     }
-  }
+  // }
   writer.end();
   console.timeEnd('Total time');
 }
 
 createFile();
 
-//Total time: 28849.232ms
+//Total time: 413500.185ms -- 1 file x10m - 2.33G
+//Total time: 28849.232ms (29secs) 10 files x 1m - 2.5G total
 
 // ================= create JSON files ===================
 // create array to hold data objs
@@ -81,51 +82,3 @@ createFile();
 module.exports.createDataObj = createDataObj;
 
 //node --max-old-space-size=8192
-
-
-/*
-let count = 1;
-let createOne = () => {
-  return new Promise((res, rej) => {
-    console.time('Total time');
-    writer.pipe(fs.createWriteStream(`./newCSV/csvData${count}.csv`))
-    for (let i = 0; i < 5; i++) {
-      const dataObj = {
-        bookId: i,
-        type: type(),
-        pageNum: pageNum(),
-        publisher: publisher(),
-        dates: dates(),
-        title: title(),
-        isbn: isbn(),
-        language: language(),
-        characters: characterArr(),
-        settings: settings(),
-        litAwards: awardsArr(),
-        coverUrl: coverUrl()
-      };
-      writer.write(dataObj);
-    }
-
-    writer.end();
-    count++;
-    console.log(`created ${count} file`);
-    console.timeEnd('Total time');
-  });
-}
-
-let createCsv = () => {
-  createOne()
-  .then(createOne)
-  .then(createOne)
-  .then(createOne)
-  .then(createOne)
-  .then(createOne)
-  .then(createOne)
-  .then(createOne)
-  .then(createOne)
-  .then(createOne)
-}
-
-createCsv();
-*/
