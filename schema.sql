@@ -1,41 +1,21 @@
-CREATE DATABASE IF NOT EXISTS books;
+CREATE DATABASE IF NOT EXISTS booksInfo;
 
-use books;
+USE booksInfo;
 
-CREATE TABLE IF NOT EXISTS details (
+CREATE TABLE IF NOT EXISTS books (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  bookId INT,
   type VARCHAR(20),
-  pagenum INT,
+  pageNum INT,
   publisher VARCHAR(100),
-  firstPubDate VARCHAR(30),
-  originalPubDate VARCHAR(30),
+  dates VARCHAR(30),
   title VARCHAR(100),
-  isbn10 VARCHAR(20),
-  isbn13 VARCHAR(20),
-  language VARCHAR(20)
+  isbn VARCHAR(20),
+  language VARCHAR(20),
+  characters VARCHAR(50),
+  settings VARCHAR(50),
+  litAwards VARCHAR(50),
+  coverUrl VARCHAR(100),
   );
 
-CREATE TABLE IF NOT EXISTS characters (
-  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(100),
-  bookId INT
-);
-
-CREATE TABLE IF NOT EXISTS awards (
-  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  name VARCHAR(100),
-  year INT,
-  bookId INT
-);
-
-CREATE TABLE IF NOT EXISTS editions (
-  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  isbn10 VARCHAR(20),
-  isbn13 VARCHAR(20),
-  title VARCHAR(100),
-  type VARCHAR(20),
-  publisher VARCHAR(100),
-  originalPubDate VARCHAR(30),
-  coverurl VARCHAR(250),
-  bookId INT
-);
+COPY books FROM `/Users/jordisman/Desktop/Jordis-Book-Extra-Info/database/csvFiles/mockData10M.csv` DELIMITERS ',' CSV;
