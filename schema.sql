@@ -19,3 +19,5 @@ CREATE TABLE IF NOT EXISTS books (
   );
 
 COPY books FROM `/Users/jordisman/Desktop/Jordis-Book-Extra-Info/database/csvFiles/mockData10M.csv` DELIMITERS ',' CSV;
+
+
