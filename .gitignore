@@ -9,6 +9,7 @@ node_modules/
 public/bundle.js
 database/mockDataFiles
 database/csvFiles
+database/pg.config.js
 
 pids
 *.pid
