@@ -8,6 +8,7 @@
     "node": ">=6.13.0"
   },
   "scripts": {
+    "seed-pg": "psql infoBooks < pgSchema.sql",
     "seed": "mongoimport -d bookInfo -c books --type csv --file database/csvFiles/mockData10M.csv --headerline",
     "seed:pg": "psql postgres < schema.sql",
     "drop:tables": "node database/dropTables.js",
