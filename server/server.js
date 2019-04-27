@@ -13,17 +13,21 @@ app.use(cors());
 // const staticPath = `${__dirname}/../public`;
 // app.use('/books/:id', express.static(staticPath));
 
-// app.get('/books/:id', db.getDetailsById);
-// app.post('/books', db.createDetails);
-// app.put('/books/:id', db.updateDetailsById);
-// app.delete('/books/:id', db.deleteDetailsById);
+app.get('/books/:id', db.getDetailsById);
+app.post('/books', db.createDetails);
+app.put('/books/:id', db.updateDetailsById);
+app.delete('/books/:id', db.deleteDetailsById);
+
+
+
+
 
 // ============ test =============
-app.get('/users', db.getUsers)
-app.get('/users/:id', db.getUserById)
-app.post('/users', db.createUser)
-app.put('/users/:id', db.updateUser)
-app.delete('/users/:id', db.deleteUser)
+// app.get('/users', db.getUsers)
+// app.get('/users/:id', db.getUserById)
+// app.post('/users', db.createUser)
+// app.put('/users/:id', db.updateUser)
+// app.delete('/users/:id', db.deleteUser)
 
 
 /*

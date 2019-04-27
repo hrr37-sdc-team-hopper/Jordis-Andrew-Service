@@ -10,13 +10,14 @@ const pool = new Pool({
 
 const getDetailsById = (req, res) => {
   console.time('get details by id time');
-  const id = req.params.id;
+  const id = parseInt(req.params.id);
   const queryStr = 'select * from books where id = $1';
   pool.query(queryStr, [id], (err, results) => {
     if (err) {
       throw new Error(err);
     } else {
       res.status(200).json(results.rows);
+      console.log(results.rows);
     }
   });
   console.timeEnd('get details by id time');
@@ -33,8 +34,8 @@ const createDetails = (req, res) => {
     if (err) {
       throw new Error(err);
     } else {
-      // res.status(201).josn(results);
-      console.log(results.rows);
+      // res.status(201).josn(req.body);
+      console.log(req.body);
     }
   });
   console.timeEnd('create details time');
@@ -42,84 +43,120 @@ const createDetails = (req, res) => {
 
 
 
+// =============== Update Details for Put Request ==============
+const updateDetailsById = (req, res) => {
+  console.time('update details by id time');
+  const id = req.params.id;
+  const { bookId, type, pageNum, publisher, dates, title, isbn, language, characters, settings, litAwards, coverUrl } = req.body;
 
-// module.exports = {
-//   getDetailsById,
-//   createDetails
-//   // updateDetailsById,
-//   // deleteDetailsById
-// };
+  const queryStr = 'update books set bookId=$1, type=$2, pageNum=$3, publisher=$4, dates=$5, title=$6, isbn=$7, language=$8, characters=$9, settings=$10, litAwards=$11, coverUrl=$12 where id = $13';
 
-// ============== test =================
-const getUsers = (request, response) => {
-  pool.query('SELECT * FROM users', (error, results) => {
-    if (error) {
-      throw error
+  pool.query(queryStr, [bookId, type, pageNum, publisher, dates, title, isbn, language, characters, settings, litAwards, coverUrl, id], (err, results) => {
+    if (err) {
+      throw new Error(err);
     } else {
-      response.status(200).json(results.rows)
+      res.status(200).json(req.body);
+      console.log(req.body);
     }
   });
+
+  console.timeEnd('update details by id time');
 }
 
-const getUserById = (request, response) => {
-  const id = parseInt(request.params.id)
-
-  pool.query('SELECT * FROM users WHERE id = $1', [id], (error, results) => {
-    if (error) {
-      throw error
-    }
-    response.status(200).json(results.rows)
-  })
-}
-
-const createUser = (request, response) => {
-  const { name, email } = request.body
-
-  pool.query('INSERT INTO users (name, email) VALUES ($1, $2)', [name, email], (error, results) => {
-    if (error) {
-      throw error
+const deleteDetailsById = (req, res) => {
+  console.time('delete details by id time');
+  const id = req.params.id;
+  const queryStr = 'delete from books where id = $1';
+  pool.query(queryStr, [id], (err, results) => {
+    if (err) {
+      throw new Error(err);
     } else {
-      response.status(201).send(results);
+      res.status(200).send('Details deleted');
     }
-
   })
+  console.timeEnd('delete details by id time');
 }
 
-const updateUser = (request, response) => {
-  const id = parseInt(request.params.id)
-  const { name, email } = request.body
-
-  pool.query(
-    'UPDATE users SET name = $1, email = $2 WHERE id = $3',
-    [name, email, id],
-    (error, results) => {
-      if (error) {
-        throw error
-      }
-      // response.status(200).send(`User modified with ID: ${id}`)
-      response.status(200).send(results)
-    }
-  )
-}
-
-const deleteUser = (request, response) => {
-  const id = parseInt(request.params.id)
-
-  pool.query('DELETE FROM users WHERE id = $1', [id], (error, results) => {
-    if (error) {
-      throw error
-    }
-    response.status(200).send(`User deleted with ID: ${id}`)
-  })
-}
 
 module.exports = {
-  getUsers,
-  getUserById,
-  createUser,
-  updateUser,
-  deleteUser,
-}
+  getDetailsById,
+  createDetails,
+  updateDetailsById,
+  deleteDetailsById
+};
+
+// ============== test =================
+// const getUsers = (request, response) => {
+//   pool.query('SELECT * FROM users', (error, results) => {
+//     if (error) {
+//       throw error
+//     } else {
+//       response.status(200).json(results.rows)
+//     }
+//   });
+// }
+
+// const getUserById = (request, response) => {
+//   const id = parseInt(request.params.id)
+
+//   pool.query('SELECT * FROM users WHERE id = $1', [id], (error, results) => {
+//     if (error) {
+//       throw error
+//     }
+//     response.status(200).json(results.rows)
+//   })
+// }
+
+
+// const createUser = (request, response) => {
+//   const { name, email } = request.body
+
+//   pool.query('INSERT INTO users (name, email) VALUES ($1, $2)', [name, email], (error, result) => {
+//     if (error) {
+//       throw error
+//     } else {
+//       response.status(201).json(request.body);
+//       console.log('req.body =', request.body);
+//     }
+//   });
+// }
+
+// const updateUser = (request, response) => {
+//   const id = parseInt(request.params.id)
+//   const { name, email } = request.body
+
+//   pool.query(
+//     'UPDATE users SET name = $1, email = $2 WHERE id = $3',
+//     [name, email, id],
+//     (error, results) => {
+//       if (error) {
+//         throw error
+//       } else {
+//         response.status(200).json(request.body);
+//         console.log('req.body =', request.body);
+//       }
+//     }
+//   )
+// }
+
+// const deleteUser = (request, response) => {
+//   const id = parseInt(request.params.id)
+
+//   pool.query('DELETE FROM users WHERE id = $1', [id], (error, results) => {
+//     if (error) {
+//       throw error
+//     }
+//     response.status(200).send(`User deleted with ID: ${id}`)
+//   });
+// }
+
+// module.exports = {
+//   getUsers,
+//   getUserById,
+//   createUser,
+//   updateUser,
+//   deleteUser,
+// }
 
 
 
