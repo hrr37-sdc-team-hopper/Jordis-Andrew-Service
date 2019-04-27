@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const cors = require('cors');
 const db = require('../database');
+require('newrelic');
 
 const app = express();
 app.use(bodyParser.json());

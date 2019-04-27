@@ -10,6 +10,7 @@ public/bundle.js
 database/mockDataFiles
 database/csvFiles
 database/pg.config.js
+newrelic.js
 
 pids
 *.pid

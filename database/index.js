@@ -32,9 +32,9 @@ const createDetails = (req, res) => {
 
   pool.query(queryStr, [bookId, type, pageNum, publisher, dates, title, isbn, language, characters, settings, litAwards, coverUrl], (err, results) => {
     if (err) {
-      throw new Error(err);
+      console.log(err);
     } else {
-      // res.status(201).josn(req.body);
+      res.status(201).json(req.body);
       console.log(req.body);
     }
   });
@@ -107,7 +107,6 @@ module.exports = {
 //   })
 // }
 
-
 // const createUser = (request, response) => {
 //   const { name, email } = request.body
 
@@ -160,7 +159,7 @@ module.exports = {
 
 
 
-
+//============ testing mongo ==========
 
 // const mongoose = require('mongoose');
 // const bookSchema = mongoose.Schema({
