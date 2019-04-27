@@ -64,14 +64,11 @@ From within the root directory:
 
 ## CRUD API
 
-GET: '/books/:id/details (get initial details)
+GET: '/books/:id (get initial details)
 
-GET: '/books/:id/details/:table (get data from either characters, awards, or editions table depending on table variable)
-
-POST: '/books/:id/details/editions/status' (handle post request when status button of want to read changed)
-
-POST: '/books/:id/details/editions/rating' (handle post request when rating of book edition changed)
+POST: '/books' (handle post request to add new book details)
 
 PUT: '/books/:id' (edit books according to book id)
 
 DELETE: '/books/:id' (delete books according to book id)
+
