@@ -15,11 +15,11 @@ const getDetailsById = (req, res) => {
   const queryStr = 'select * from books where id = $1';
   pool.query(queryStr, [id], (err, results) => {
     if (err) {
-      // throw new Error(err);
-      console.log('error from getDetailById:', err)
+      throw new Error(err);
+      // console.log('error from getDetailById:', err)
     } else {
       res.status(200).json(results.rows);
-      console.log(results.rows);
+      console.log('results.rows:', results.rows);
     }
   });
   console.timeEnd('get details by id time');
