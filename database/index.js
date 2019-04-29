@@ -10,11 +10,13 @@ const pool = new Pool({
 
 const getDetailsById = (req, res) => {
   console.time('get details by id time');
-  const id = parseInt(req.params.id);
+
+  const id = req.params.id;
   const queryStr = 'select * from books where id = $1';
   pool.query(queryStr, [id], (err, results) => {
     if (err) {
-      throw new Error(err);
+      // throw new Error(err);
+      console.log('error from getDetailById:', err)
     } else {
       res.status(200).json(results.rows);
       console.log(results.rows);
@@ -25,12 +27,12 @@ const getDetailsById = (req, res) => {
 
 const createDetails = (req, res) => {
   console.time('create details time');
+  // must be all lower case or it'd be Null
+  const { bookid, type, pagenum, publisher, dates, title, isbn, language, characters, settings, litawards, coverurl } = req.body;
 
-  const { bookId, type, pageNum, publisher, dates, title, isbn, language, characters, settings, litAwards, coverUrl } = req.body;
+  const queryStr = 'insert into books (bookid, type, pagenum, publisher, dates, title, isbn, language, characters, settings, litawards, coverurl) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)';
 
-  const queryStr = 'insert into books (bookId, type, pageNum, publisher, dates, title, isbn, language, characters, settings, litAwards, coverUrl) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)';
-
-  pool.query(queryStr, [bookId, type, pageNum, publisher, dates, title, isbn, language, characters, settings, litAwards, coverUrl], (err, results) => {
+  pool.query(queryStr, [bookid, type, pagenum, publisher, dates, title, isbn, language, characters, settings, litawards, coverurl], (err, results) => {
     if (err) {
       console.log(err);
     } else {
@@ -47,11 +49,11 @@ const createDetails = (req, res) => {
 const updateDetailsById = (req, res) => {
   console.time('update details by id time');
   const id = req.params.id;
-  const { bookId, type, pageNum, publisher, dates, title, isbn, language, characters, settings, litAwards, coverUrl } = req.body;
+  const { bookid, type, pagenum, publisher, dates, title, isbn, language, characters, settings, litawards, coverurl } = req.body;
 
-  const queryStr = 'update books set bookId=$1, type=$2, pageNum=$3, publisher=$4, dates=$5, title=$6, isbn=$7, language=$8, characters=$9, settings=$10, litAwards=$11, coverUrl=$12 where id = $13';
+  const queryStr = 'update books set bookid=$1, type=$2, pagenum=$3, publisher=$4, dates=$5, title=$6, isbn=$7, language=$8, characters=$9, settings=$10, litawards=$11, coverurl=$12 where id = $13';
 
-  pool.query(queryStr, [bookId, type, pageNum, publisher, dates, title, isbn, language, characters, settings, litAwards, coverUrl, id], (err, results) => {
+  pool.query(queryStr, [bookid, type, pagenum, publisher, dates, title, isbn, language, characters, settings, litawards, coverurl], (err, results) => {
     if (err) {
       throw new Error(err);
     } else {
