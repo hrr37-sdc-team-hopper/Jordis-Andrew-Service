@@ -11,11 +11,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 app.use(cors());
 
-// const staticPath = `${__dirname}/../public`;
+const staticPath = `${__dirname}/../public`;
 // app.use('/books/:id', express.static(staticPath));
+app.use('/booksInfo/:id', express.static(staticPath));
 
 app.get('/books/:id', db.getDetailsById);
 app.get('/books/:id/details', db.getDetailsById);
+app.get('/books/:id/details/characters', db.getDetailsById);
+app.get('/books/:id/details/awards', db.getDetailsById);
 app.get('/books/:id/details/editions', db.getDetailsById);
 
 app.post('/books', db.createDetails);

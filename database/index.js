@@ -7,7 +7,7 @@ const pool = new Pool({
   database: user.database
 });
 
-
+// =============== Get All Data for Get Request ===============
 const getDetailsById = (req, res) => {
   console.time('get details by id time');
 
@@ -25,6 +25,8 @@ const getDetailsById = (req, res) => {
   console.timeEnd('get details by id time');
 }
 
+
+// ============== Create New Info for Post Request ===============
 const createDetails = (req, res) => {
   console.time('create details time');
   // must be all lower case or it'd be Null
@@ -65,6 +67,7 @@ const updateDetailsById = (req, res) => {
   console.timeEnd('update details by id time');
 }
 
+// =============== Delete Details ==============
 const deleteDetailsById = (req, res) => {
   console.time('delete details by id time');
   const id = req.params.id;

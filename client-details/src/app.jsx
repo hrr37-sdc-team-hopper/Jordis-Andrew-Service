@@ -10,7 +10,7 @@ class DetailApp extends React.Component {
     return (
       <div>
         <Router>
-          <Route path="/books/:id" component={EditionHeader} />
+          <Route path="/booksInfo/:id" component={EditionHeader} />
         </Router>
       </div>
     );
@@ -19,3 +19,4 @@ class DetailApp extends React.Component {
 
 export default DetailApp;
 
+// <Route path="/books/:id" component={EditionHeader} />
