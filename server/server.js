@@ -17,9 +17,10 @@ app.use('/booksInfo/:id', express.static(staticPath));
 
 app.get('/books/:id', db.getDetailsById);
 app.get('/books/:id/details', db.getDetailsById);
-app.get('/books/:id/details/characters', db.getDetailsById);
-app.get('/books/:id/details/awards', db.getDetailsById);
+app.get('/books/:id/details/characters', db.getCharactersById);
+app.get('/books/:id/details/awards', db.getAwardsById);
 app.get('/books/:id/details/editions', db.getDetailsById);
+app.get('/books/:id/details/settings', db.getSettingsById);
 
 app.post('/books', db.createDetails);
 app.put('/books/:id', db.updateDetailsById);

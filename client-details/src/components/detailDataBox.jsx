@@ -7,11 +7,11 @@ import styles from './css/DetailDataBox.less';
 
 const DetailDataBox = (props) => {
   const {
-    id, title, isbn10, isbn13, language,
+    id, title, isbn13, language,
   } = props.details;
 
   const mainInfo = {
-    id, title, isbn10, isbn13, language,
+    id, title, isbn13, isbn13, language,
   };
 
   return (

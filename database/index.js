@@ -12,19 +12,89 @@ const getDetailsById = (req, res) => {
   console.time('get details by id time');
 
   const id = req.params.id;
+  console.log('req.params.id:', req.params.id);
+
   const queryStr = 'select * from books where id = $1';
   pool.query(queryStr, [id], (err, results) => {
+    console.timeEnd('get details by id time'); //put after pool.query, that's where the query done, not after entire cb
     if (err) {
-      throw new Error(err);
-      // console.log('error from getDetailById:', err)
+      console.log('error from getDetailById:', err)
+    } else {
+      res.status(200).json(results.rows[0]);
+      console.log('results.rows:', results.rows);
+    }
+  });
+}
+
+// =============== Get Characters ===============
+const getCharactersById = (req, res) => {
+  console.time('getCharactersById time');
+  const id = req.params.id;
+  const queryStr = 'select characters from books where id = $1';
+  pool.query(queryStr, [id], (err, results) => {
+    console.timeEnd('getCharactersById time');
+    if (err) {
+      console.log('error from getCharactersById:', err)
     } else {
       res.status(200).json(results.rows);
       console.log('results.rows:', results.rows);
     }
   });
-  console.timeEnd('get details by id time');
 }
 
+// =============== Get Awards ===============
+const getAwardsById = (req, res) => {
+  console.time('getAwardsById time');
+  const id = req.params.id;
+  const queryStr = 'select litawards from books where id = $1';
+  pool.query(queryStr, [id], (err, results) => {
+    console.timeEnd('getAwardsById time');
+    if (err) {
+      console.log('error from getAwardsById:', err)
+    } else {
+      let award = [{
+        name: results.rows[0].litawards.slice(0, -4),
+        year: results.rows[0].litawards.slice(-4)
+      }];
+      res.status(200).json(award);
+      console.log('award:', award);
+    }
+  });
+}
+
+// =============== Get Editions ===============
+const getEditionsById = (req, res) => {
+  console.time('getEditionsById time');
+  const id = req.params.id;
+  console.log('req.params.id:', req.params.id);
+  const queryStr = 'select editions from books where id = $1';
+  pool.query(queryStr, [id], (err, results) => {
+    console.timeEnd('getEditionsById time');
+    if (err) {
+      console.log('error from getEditionsById:', err)
+    } else {
+      res.status(200).json(results.rows);
+      console.log('results.rows:', results.rows);
+    }
+  });
+}
+
+// =============== Get Settings ===============
+const getSettingsById = (req, res) => {
+  console.time('getSettingsById time');
+  const id = req.params.id;
+  console.log('req.params.id:', req.params.id);
+  const queryStr = 'select settings from books where id = $1';
+  pool.query(queryStr, [id], (err, results) => {
+    console.timeEnd('getSettingsById time');
+    if (err) {
+      console.log('error from getSettingsById:', err)
+    } else {
+      res.status(200).json(results.rows);
+      console.log('results.rows:', results.rows);
+    }
+  });
+}
 
 // ============== Create New Info for Post Request ===============
 const createDetails = (req, res) => {
@@ -35,14 +105,15 @@ const createDetails = (req, res) => {
   const queryStr = 'insert into books (bookid, type, pagenum, publisher, dates, title, isbn, language, characters, settings, litawards, coverurl) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)';
 
   pool.query(queryStr, [bookid, type, pagenum, publisher, dates, title, isbn, language, characters, settings, litawards, coverurl], (err, results) => {
+    console.timeEnd('create details time');
     if (err) {
-      console.log(err);
+      console.log('createDetails:', err);
     } else {
       res.status(201).json(req.body);
       console.log(req.body);
     }
   });
-  console.timeEnd('create details time');
+
 }
 
 
@@ -57,7 +128,8 @@ const updateDetailsById = (req, res) => {
 
   pool.query(queryStr, [bookid, type, pagenum, publisher, dates, title, isbn, language, characters, settings, litawards, coverurl], (err, results) => {
     if (err) {
-      throw new Error(err);
+      // throw new Error(err);
+      console.log('error in updateDetailsById: ', err);
     } else {
       res.status(200).json(req.body);
       console.log(req.body);
@@ -87,104 +159,9 @@ module.exports = {
   getDetailsById,
   createDetails,
   updateDetailsById,
-  deleteDetailsById
+  deleteDetailsById,
+  getCharactersById,
+  getAwardsById,
+  getEditionsById,
+  getSettingsById
 };
-
-// ============== test =================
-// const getUsers = (request, response) => {
-//   pool.query('SELECT * FROM users', (error, results) => {
-//     if (error) {
-//       throw error
-//     } else {
-//       response.status(200).json(results.rows)
-//     }
-//   });
-// }
-
-// const getUserById = (request, response) => {
-//   const id = parseInt(request.params.id)
-
-//   pool.query('SELECT * FROM users WHERE id = $1', [id], (error, results) => {
-//     if (error) {
-//       throw error
-//     }
-//     response.status(200).json(results.rows)
-//   })
-// }
-
-// const createUser = (request, response) => {
-//   const { name, email } = request.body
-
-//   pool.query('INSERT INTO users (name, email) VALUES ($1, $2)', [name, email], (error, result) => {
-//     if (error) {
-//       throw error
-//     } else {
-//       response.status(201).json(request.body);
-//       console.log('req.body =', request.body);
-//     }
-//   });
-// }
-
-// const updateUser = (request, response) => {
-//   const id = parseInt(request.params.id)
-//   const { name, email } = request.body
-
-//   pool.query(
-//     'UPDATE users SET name = $1, email = $2 WHERE id = $3',
-//     [name, email, id],
-//     (error, results) => {
-//       if (error) {
-//         throw error
-//       } else {
-//         response.status(200).json(request.body);
-//         console.log('req.body =', request.body);
-//       }
-//     }
-//   )
-// }
-
-// const deleteUser = (request, response) => {
-//   const id = parseInt(request.params.id)
-
-//   pool.query('DELETE FROM users WHERE id = $1', [id], (error, results) => {
-//     if (error) {
-//       throw error
-//     }
-//     response.status(200).send(`User deleted with ID: ${id}`)
-//   });
-// }
-
-// module.exports = {
-//   getUsers,
-//   getUserById,
-//   createUser,
-//   updateUser,
-//   deleteUser,
-// }
-
-
-
-//============ testing mongo ==========
-
-// const mongoose = require('mongoose');
-// const bookSchema = mongoose.Schema({
-//   id: Number,
-//   title: String,
-//   isbn: Number,
-//   language: String,
-//   characters: String,
-//   awards: String
-// })
-
-// let Book = mongoose.model('Book', bookSchema);
-
-// const getDetails = (id, callback) => {
-//   Book.find({'id': id}, (err, data) => {
-//     if (err) {
-//       console.log('failed to get data', err);
-//     } else {
-//       callback(data);
-//     }
-//   })
-//   .limit(1);
-// };

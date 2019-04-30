@@ -26,6 +26,7 @@ class Characters extends React.Component {
     const { id } = this.props;
     axios.get(`/books/${id}/details/characters`)
       .then((res) => {
+        console.log('getCharacters data:', res.data, typeof (res.data));
         const allCharactersArr = this.generateCharactersMainAndMore(res.data);
         this.setState({
           charactersMain: allCharactersArr[0],

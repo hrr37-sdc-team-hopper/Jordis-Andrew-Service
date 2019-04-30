@@ -26,6 +26,7 @@ class Awards extends React.Component {
     const { id } = this.props;
     axios.get(`/books/${id}/details/awards`)
       .then((res) => {
+        console.log('getAwards data:', res.data, typeof (res.data));
         const allAwardsArr = this.generateAwardsMainAndMore(res.data);
         this.setState({
           awardsMain: allAwardsArr[0],

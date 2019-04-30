@@ -63,7 +63,7 @@ module.exports.title = title;
 /* =================== ISBN generator ===================== */
 
 const getIsbn = () => {
-  let isbnNum = '1234567890';
+  let isbnNum = '1234567';
   const num = getRandomInt(350, 500);
   isbnNum += num.toString();
   return isbnNum;
@@ -100,7 +100,7 @@ const awardsArr = () => {
   const awardArray = [];
   let num = getRandomInt(0, 3);
 
-  const awards = ['Man Booker Prize 2009', 'Pulitzer Prize 2012', 'Costa Book Awards 2013', 'Hugo Award 2014', 'Edgar Awards 2016'];
+  const awards = ['Man-Booker Prize 2009', 'Pulitzer Prize 2012', 'Costa Book Awards 2013', 'Hugo Award 2014', 'Edgar Awards 2016'];
 
   while (num > 0) {
     const awardIndex = getRandomInt(0, 5);

@@ -22,7 +22,7 @@ class OtherEditions extends React.Component {
     const { id } = this.props;
     axios.get(`/books/${id}/details/editions`)
       .then((res) => {
-        console.log('getEditions data:', res.data);
+        console.log('getEditions data:', res.data, typeof (res.data));
         const editionsArr = res.data;
         const { length } = editionsArr;
         const editionsMain = editionsArr.slice(0, 5);
