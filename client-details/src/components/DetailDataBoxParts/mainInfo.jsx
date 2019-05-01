@@ -3,7 +3,7 @@ import sharedStyles from '../css/SharedStyles.less';
 
 const MainInfo = (props) => {
   const {
-    title, isbn10, isbn13, language,
+    title, isbn13, language,
   } = props.mainInfo;
 
   return (

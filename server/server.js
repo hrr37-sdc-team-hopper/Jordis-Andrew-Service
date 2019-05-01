@@ -19,7 +19,7 @@ app.get('/books/:id', db.getDetailsById);
 app.get('/books/:id/details', db.getDetailsById);
 app.get('/books/:id/details/characters', db.getCharactersById);
 app.get('/books/:id/details/awards', db.getAwardsById);
-app.get('/books/:id/details/editions', db.getDetailsById);
+app.get('/books/:id/details/editions', db.getEditionsById);
 app.get('/books/:id/details/settings', db.getSettingsById);
 
 app.post('/books', db.createDetails);
