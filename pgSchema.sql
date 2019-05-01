@@ -13,9 +13,10 @@ CREATE TABLE IF NOT EXISTS books (
   characters VARCHAR(1000),
   settings VARCHAR(50),
   litawards VARCHAR(50),
-  editions VARCHAR(100)
+  coverurl VARCHAR(100)
   );
 
-COPY books(bookid, type, pagenum, publisher, firstpubdates, title, isbn13, language, characters, settings, litawards, editions) FROM '/Users/jordisman/Desktop/Jordis-Book-Extra-Info/database/csvFiles/mockData10M.csv' DELIMITERS ',' CSV HEADER;
+-- COPY books(bookid, type, pagenum, publisher, firstpubdates, title, isbn13, language, characters, settings, litawards, editions) FROM '/Users/jordisman/Desktop/Jordis-Book-Extra-Info/database/csvFiles/mockData10M.csv' DELIMITERS ',' CSV HEADER;
+COPY books(bookid, type, pagenum, publisher, firstpubdates, title, isbn13, language, characters, settings, litawards, coverurl) FROM '/home/ec2-user/Jordis-Book-Extra-Info/database/csvFiles/mockData10M.csv' DELIMITERS ',' CSV HEADER;
 
 \timing OFF
