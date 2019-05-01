@@ -12,6 +12,32 @@ module.exports.getRandomInt = getRandomInt;
 //   return faker.random.number({ 'min': 1, 'max': 10000000 });
 // };
 // module.exports.bookId = bookId;
+const image = () => {
+  var img1 = faker.image.image();
+  var img2 = faker.image.image();
+  var img3 = faker.image.image();
+  var img4 = faker.image.image();
+  var img5 = faker.image.image();
+  var img6 = faker.image.image();
+  var img7 = faker.image.image();
+  var img8 = faker.image.image();
+  var img9 = faker.image.image();
+  var img0 = faker.image.image();
+  console.log(img1);
+  console.log(img2);
+  console.log(img3);
+  console.log(img4);
+  console.log(img5);
+  console.log(img6);
+  console.log(img7);
+  console.log(img8);
+  console.log(img9);
+  console.log(img0);
+  return faker.image.image();
+};
+image();
+module.exports.image = image;
+
 
 /* =================== Book Type ===================== */
 

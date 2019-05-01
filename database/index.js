@@ -36,8 +36,10 @@ const getCharactersById = (req, res) => {
     if (err) {
       console.log('error from getCharactersById:', err)
     } else {
-      res.status(200).json(results.rows);
-      console.log('results.rows:', results.rows);
+      let characters = [{name: results.rows[0].characters}];
+      // res.status(200).json(results.rows);
+      res.status(200).json(characters);
+      console.log('characters results.rows:', characters);
     }
   });
 }
@@ -67,7 +69,7 @@ const getEditionsById = (req, res) => {
   console.time('getEditionsById time');
   const id = req.params.id;
   console.log('req.params.id:', req.params.id);
-  const queryStr = 'select editions from books where id = $1';
+  const queryStr = 'select * from books where id = $1';
   pool.query(queryStr, [id], (err, results) => {
     console.timeEnd('getEditionsById time');
     if (err) {
