@@ -15,6 +15,7 @@ class EditionTooltip extends React.Component {
     };
     this.handleHideModalButtonClick = this.handleHideModalButtonClick.bind(this);
     this.handleHideModalOutsideClick = this.handleHideModalOutsideClick.bind(this);
+    console.log('editionToolTip props:', props);
   }
 
   handleShowModalClick(e) {
@@ -33,7 +34,7 @@ class EditionTooltip extends React.Component {
 
   render() {
     const {
-      isbn10, isbn13, originalPubDate, publisher, title, type, coverurl,
+      isbn13, firstpubdates, publisher, title, type, coverurl,
     } = this.props;
     const { showModal } = this.state;
 
@@ -43,11 +44,11 @@ class EditionTooltip extends React.Component {
           <div className={styles.editionTooltipBorderFrame}>
             <div className={styles.editionTooltipBorderCenter}>
               <div className={styles.editionBook}>
-                <div>{`${title} (${type})`}</div>
-                <div>{`isbn: ${isbn10}`}</div>
+                <div>{`title: ${title}`}</div>
+                <div>{`isbn: ${isbn13}`}</div>
                 <div>{`isbn13: ${isbn13}`}</div>
                 <div>{`format: ${type}`}</div>
-                <div>{`Published ${originalPubDate} by ${publisher}`}</div>
+                <div>{`Published ${firstpubdates} by ${publisher}`}</div>
                 <span className={sharedStyles.greenUnderlineButton} onClick={(e) => { this.handleShowModalClick(e); }}>Enlarge cover</span>
                 <div className={styles.editionStatusWrapper}>
                   <span title="status" style={{ paddingRight: '10px' }}>Want to Read</span>

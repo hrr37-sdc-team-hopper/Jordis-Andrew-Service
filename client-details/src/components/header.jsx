@@ -30,6 +30,7 @@ class EditionHeader extends React.Component {
 
     axios.get(`/books/${id}/details`)
       .then((res) => {
+        console.log('getMainDetails data:', res.data, typeof(res.data));
         this.setState({
           details: res.data,
         });
@@ -39,11 +40,11 @@ class EditionHeader extends React.Component {
 
   generatePublisherInfoLine() {
     const {
-      type, pagenum, originalPubDate, firstPubDate, publisher,
+      type, pagenum, firstpubdate, publisher,
     } = this.state.details;
     const typeAndPageNumberLine = `${type}, ${pagenum} pages`;
-    const publishInfoLine = `Published ${originalPubDate} by ${publisher}`;
-    const firstPubDateLine = `(first published ${firstPubDate} )`;
+    const publishInfoLine = `Published ${firstpubdate} by ${publisher}`;
+    const firstPubDateLine = `(first published ${firstpubdate} )`;
 
     return (
       <div>

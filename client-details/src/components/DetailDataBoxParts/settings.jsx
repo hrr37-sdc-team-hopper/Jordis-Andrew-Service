@@ -27,6 +27,7 @@ class Settings extends React.Component {
     const { id } = this.props;
     axios.get(`/books/${id}/details/settings`)
       .then((res) => {
+        console.log('getSettings data:', res.data, typeof(res.data));
         const settingsArr = res.data;
         const { length } = settingsArr;
         const settingsMain = settingsArr.slice(0, 3);
@@ -47,11 +48,10 @@ class Settings extends React.Component {
     const settingsSpanArray = [];
 
     array.forEach((setting, i) => {
-      const { city, country } = setting;
+      const { settings } = setting;
       settingsSpanArray.push(
         <div className={sharedStyles.greenUnderlineButton} key={i}>
-          {`${city} `}
-          <span className={sharedStyles.greyoutButton}>({country})</span>
+          {`${settings} `}
           <br />
         </div>,
       );

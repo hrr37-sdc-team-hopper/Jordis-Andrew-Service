@@ -3,7 +3,7 @@ import sharedStyles from '../css/SharedStyles.less';
 
 const MainInfo = (props) => {
   const {
-    title, isbn10, isbn13, language,
+    title, isbn13, language,
   } = props.mainInfo;
 
   return (
@@ -15,7 +15,7 @@ const MainInfo = (props) => {
       <div>
         <div className={sharedStyles.detailBoxRowTitle}>ISBN</div>
         <div className={sharedStyles.detailBoxRowItem}>
-          {`${isbn10}`}
+          {`${isbn13}`}
           &nbsp;
           <span className={sharedStyles.greyoutButton}>{`(ISBN13: ${isbn13})`}</span>
         </div>
