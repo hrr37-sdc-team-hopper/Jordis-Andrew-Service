@@ -6,22 +6,22 @@ const {
   type, pageNum, publisher, dates, title, getIsbn, language, characterArr, awardsArr, coverUrl, settings,
 } = require('./sampleDataMethods.js');
 
-const createDataObj = () => {
-  const dataObj = {
-    type: type(),
-    pageNum: pageNum(),
-    publisher: publisher(),
-    dates: dates(),
-    title: title(),
-    isbn: getIsbn(),
-    language: language(),
-    characters: characterArr(),
-    settings: settings(),
-    litAwards: awardsArr(),
-    coverUrl: coverUrl()
-  };
-  return dataObj;
-};
+// const createDataObj = () => {
+//   const dataObj = {
+//     type: type(),
+//     pageNum: pageNum(),
+//     publisher: publisher(),
+//     dates: dates(),
+//     title: title(),
+//     isbn: getIsbn(),
+//     language: language(),
+//     characters: characterArr(),
+//     settings: settings(),
+//     litAwards: awardsArr(),
+//     coverUrl: coverUrl()
+//   };
+//   return dataObj;
+// };
 
 // let dataObj = createDataObj();
 // console.log('dataObj = ', dataObj);
@@ -34,18 +34,18 @@ let createFile = () => {
     writer.pipe(fs.createWriteStream(`./csvFiles/mockData10M.csv`))
     for (let i = 0; i < 10000000; i++) {
       const dataObj = {
-        bookId: i,
+        bookid: i,
         type: type(),
-        pageNum: pageNum(),
+        pagenum: pageNum(),
         publisher: publisher(),
-        dates: dates(),
+        firstpubdates: dates(),
         title: title(),
-        isbn: isbn(),
+        isbn13: getIsbn(),
         language: language(),
         characters: characterArr(),
         settings: settings(),
-        litAwards: awardsArr(),
-        coverUrl: coverUrl()
+        litawards: awardsArr(),
+        coverurl: coverUrl()
       };
       writer.write(dataObj);
     }

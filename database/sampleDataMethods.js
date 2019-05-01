@@ -118,16 +118,16 @@ const coverUrl = () => {
 
   let imageArr = ['https://s3.amazonaws.com/uifaces/faces/twitter/samuelkraft/128.jpg',
     'https://s3.amazonaws.com/uifaces/faces/twitter/fronx/128.jpg',
-    'https://s3.amazonaws.com/uifaces/faces/twitter/hafeeskhan/128.jpg',
+    'http://lorempixel.com/640/480/fashion',
     'https://s3.amazonaws.com/uifaces/faces/twitter/dhilipsiva/128.jpg',
     'https://s3.amazonaws.com/uifaces/faces/twitter/gavr1l0/128.jpg',
     'https://s3.amazonaws.com/uifaces/faces/twitter/r_garcia/128.jpg',
-    'https://s3.amazonaws.com/uifaces/faces/twitter/danro/128.jpg',
-    'https://s3.amazonaws.com/uifaces/faces/twitter/rahmeen/128.jpg',
-    'https://s3.amazonaws.com/uifaces/faces/twitter/kohette/128.jpg',
-    'https://s3.amazonaws.com/uifaces/faces/twitter/sangdth/128.jpg'];
+    'http://lorempixel.com/640/480/nightlife',
+    'http://lorempixel.com/640/480/cats',
+    'http://lorempixel.com/640/480/city',
+    'http://lorempixel.com/640/480/nature'];
 
-  const num = getRandomInt(1, 10);
+  const num = getRandomInt(0, 10);
   return imageArr[num];
 
 };
