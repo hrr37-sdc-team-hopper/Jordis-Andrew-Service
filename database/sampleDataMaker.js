@@ -6,25 +6,25 @@ const {
   type, pageNum, publisher, dates, title, getIsbn, language, characterArr, awardsArr, coverUrl, settings,
 } = require('./sampleDataMethods.js');
 
-// const createDataObj = () => {
-//   const dataObj = {
-//     type: type(),
-//     pageNum: pageNum(),
-//     publisher: publisher(),
-//     dates: dates(),
-//     title: title(),
-//     isbn: getIsbn(),
-//     language: language(),
-//     characters: characterArr(),
-//     settings: settings(),
-//     litAwards: awardsArr(),
-//     coverUrl: coverUrl()
-//   };
-//   return dataObj;
-// };
+const createDataObj = () => {
+  const dataObj = {
+    type: type(),
+    pageNum: pageNum(),
+    publisher: publisher(),
+    dates: dates(),
+    title: title(),
+    isbn: getIsbn(),
+    language: language(),
+    characters: characterArr(),
+    settings: settings(),
+    litAwards: awardsArr(),
+    coverUrl: coverUrl()
+  };
+  return dataObj;
+};
 
-// let dataObj = createDataObj();
-// console.log('dataObj = ', dataObj);
+let dataObj = createDataObj();
+console.log('dataObj = ', dataObj);
 
 // ================= create CSV files ===================
 
