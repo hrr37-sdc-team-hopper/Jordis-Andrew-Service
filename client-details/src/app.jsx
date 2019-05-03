@@ -10,7 +10,7 @@ class DetailApp extends React.Component {
     return (
       <div>
         <Router>
-          <Route path="/booksInfo/:id" component={EditionHeader} />
+          <Route path="/books/:id" component={EditionHeader} />
         </Router>
       </div>
     );

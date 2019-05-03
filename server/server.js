@@ -12,10 +12,10 @@ app.use(morgan('dev'));
 app.use(cors());
 
 const staticPath = `${__dirname}/../public`;
-// app.use('/books/:id', express.static(staticPath));
-app.use('/booksInfo/:id', express.static(staticPath));
+app.use('/books/:id', express.static(staticPath));
+// app.use('/booksInfo/:id', express.static(staticPath));
 
-app.get('/books/:id', db.getDetailsById);
+// app.get('/books/:id', db.getDetailsById);
 app.get('/books/:id/details', db.getDetailsById);
 app.get('/books/:id/details/characters', db.getCharactersById);
 app.get('/books/:id/details/awards', db.getAwardsById);

@@ -4,7 +4,9 @@ const user = require('./pg.config.js');
 const pool = new Pool({
   user: user.user,
   host: user.host,
-  database: user.database
+  port: user.port,
+  database: user.database,
+  password: user.password
 });
 
 // =============== Get All Data for Get Request ===============
