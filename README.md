@@ -1,4 +1,4 @@
-# andrew-fec-service (ExtraDetails Component)
+# Jordis-SDC (ExtraDetails Component)
 
 Recreates the extra details component of goodreads.com. The component is minimized when first rendered and can be expanded to its full view by clicking the more button.
 
